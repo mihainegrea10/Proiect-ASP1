@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Proiect_ASP.Data;
+using Proiect_ASP1.Repositories.ImpresarRepository;
+using Proiect_ASP1.Services.DemoService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,8 @@ builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.C
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddTransient<IImpresarRepository,ImpresarRepository>();
+builder.Services.AddTransient<IDemoService,DemoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

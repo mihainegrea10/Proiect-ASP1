@@ -8,5 +8,7 @@ namespace Proiect_ASP.Models.Base
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+
+        
     }
 }

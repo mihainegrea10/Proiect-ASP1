@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_ASP.Data;
 using Proiect_ASP.Models;
 using Proiect_ASP1.Models;
+using Proiect_ASP1.Services.DemoService;
 
 namespace Proiect_ASP1.Controllers
 {
@@ -17,6 +18,18 @@ namespace Proiect_ASP1.Controllers
             _Context = context;
 
         }
+        private readonly IDemoService _demoService;
+        public ImpresarController(IDemoService demoService)
+        {
+            _demoService = demoService;
+        }
+        /*
+        [HttpGet]
+        public IActionResult GetBynume_familie(string nume_familie)
+        {
+            var result = _demoService.GetDataMappedBynume_familie(nume_familie);
+            return Ok(result);
+        }*/
         [HttpGet]
         public async Task<IActionResult> GetImpresari()
         {
@@ -93,5 +106,7 @@ namespace Proiect_ASP1.Controllers
 
             return NoContent();
         }
+        
+        
     }
 }

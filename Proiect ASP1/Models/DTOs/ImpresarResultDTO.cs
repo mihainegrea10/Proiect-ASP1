@@ -2,9 +2,12 @@
 {
     public class ImpresarResultDTO
     {
-        public string prenume { get; set; }
+        public Guid Id { get; set; }
+        public string prenume { get; set; } 
         public string nume_familie { get; set; }
+       
         public int jucatori_impresariati { get; set; }
+
 
     }
 }

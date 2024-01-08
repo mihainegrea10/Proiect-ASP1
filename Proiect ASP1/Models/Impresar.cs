@@ -8,6 +8,6 @@ namespace Proiect_ASP1.Models
         public string prenume { get; set; }
         public string nume_familie { get; set; }
         public int jucatori_impresariati { get; set; }
-        public ICollection<Jucator> jucators{ get; set; }
+        public ICollection<Jucator>? jucators{ get; set; }
     }
 }

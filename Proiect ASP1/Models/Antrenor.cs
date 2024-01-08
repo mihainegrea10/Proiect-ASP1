@@ -9,6 +9,6 @@ namespace Proiect_ASP.Models
         public DateTime? data_nastere { get; set; }
         public int trofee { get; set; }
         
-        public Echipa Echipa { get; set; }
+        public Echipa? Echipa { get; set; }
     }
 }

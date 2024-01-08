@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_ASP.Data;
 using Proiect_ASP.Models;
 using Proiect_ASP1.Models;
+using Proiect_ASP1.Models.DTOs;
 using Proiect_ASP1.Services.DemoService;
 
 namespace Proiect_ASP1.Controllers
@@ -54,7 +55,7 @@ namespace Proiect_ASP1.Controllers
             if (ModelState.IsValid)
             {
                 impresar.Id = Guid.NewGuid(); // Generate a new Guid for the entity
-                _Context.impresars.Add(impresar);
+                 _Context.impresars.Add(impresar);
                 await _Context.SaveChangesAsync();
                 return CreatedAtAction("GetImpresar", new { id = impresar.Id }, impresar);
             }

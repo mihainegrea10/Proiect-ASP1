@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Proiect_ASP.Data;
+using Proiect_ASP1.Helper.Extensions;
+using Proiect_ASP1.Helper.Seeders;
 using Proiect_ASP1.Repositories.ImpresarRepository;
 using Proiect_ASP1.Services.DemoService;
 
@@ -12,8 +14,14 @@ builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.C
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IImpresarRepository,ImpresarRepository>();
-builder.Services.AddTransient<IDemoService,DemoService>();
+
+builder.Services.AddRepositories();
+builder.Services.AddServices();
+builder.Services.AddSeeders();
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,3 +38,16 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void SeedData(IHost app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<AntrenorSeeder>();
+        service.SeedInitialAntrenori();
+    }
+}
+
+
+

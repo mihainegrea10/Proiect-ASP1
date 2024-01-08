@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Proiect_ASP1.Migrations
 {
     /// <inheritdoc />
-    public partial class _3 : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,19 +27,17 @@ namespace Proiect_ASP1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "jucators",
+                name: "impresars",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     prenume = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     nume_familie = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    aparitii = table.Column<int>(type: "int", nullable: false),
-                    varsta = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    goluri = table.Column<int>(type: "int", nullable: false)
+                    jucatori_impresariati = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_jucators", x => x.Id);
+                    table.PrimaryKey("PK_impresars", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,7 +47,7 @@ namespace Proiect_ASP1.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nume = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Localitate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Data_Infiintare = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Data_Infiintare = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AntrenorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -59,6 +57,28 @@ namespace Proiect_ASP1.Migrations
                         name: "FK_echipas_antrenors_AntrenorId",
                         column: x => x.AntrenorId,
                         principalTable: "antrenors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "jucators",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    prenume = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nume_familie = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    aparitii = table.Column<int>(type: "int", nullable: false),
+                    goluri = table.Column<int>(type: "int", nullable: false),
+                    ImpresarId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_jucators", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_jucators_impresars_ImpresarId",
+                        column: x => x.ImpresarId,
+                        principalTable: "impresars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -97,6 +117,11 @@ namespace Proiect_ASP1.Migrations
                 table: "echipas",
                 column: "AntrenorId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_jucators_ImpresarId",
+                table: "jucators",
+                column: "ImpresarId");
         }
 
         /// <inheritdoc />
@@ -113,6 +138,9 @@ namespace Proiect_ASP1.Migrations
 
             migrationBuilder.DropTable(
                 name: "antrenors");
+
+            migrationBuilder.DropTable(
+                name: "impresars");
         }
     }
 }

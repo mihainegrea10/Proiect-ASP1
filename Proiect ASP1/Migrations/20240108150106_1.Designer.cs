@@ -12,8 +12,8 @@ using Proiect_ASP.Data;
 namespace Proiect_ASP1.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231008215323_4")]
-    partial class _4
+    [Migration("20240108150106_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace Proiect_ASP1.Migrations
                     b.Property<Guid>("AntrenorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Data_Infiintare")
+                    b.Property<DateTime?>("Data_Infiintare")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Localitate")
@@ -84,6 +84,9 @@ namespace Proiect_ASP1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ImpresarId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("aparitii")
                         .HasColumnType("int");
 
@@ -98,10 +101,9 @@ namespace Proiect_ASP1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("varsta")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ImpresarId");
 
                     b.ToTable("jucators");
                 });
@@ -154,6 +156,17 @@ namespace Proiect_ASP1.Migrations
                     b.Navigation("Antrenor");
                 });
 
+            modelBuilder.Entity("Proiect_ASP.Models.Jucator", b =>
+                {
+                    b.HasOne("Proiect_ASP1.Models.Impresar", "Impresar")
+                        .WithMany("jucators")
+                        .HasForeignKey("ImpresarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Impresar");
+                });
+
             modelBuilder.Entity("Proiect_ASP.Models.echipa_cont_juc", b =>
                 {
                     b.HasOne("Proiect_ASP.Models.Echipa", "Echipa")
@@ -187,6 +200,11 @@ namespace Proiect_ASP1.Migrations
             modelBuilder.Entity("Proiect_ASP.Models.Jucator", b =>
                 {
                     b.Navigation("echipa_Cont_Jucs");
+                });
+
+            modelBuilder.Entity("Proiect_ASP1.Models.Impresar", b =>
+                {
+                    b.Navigation("jucators");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,8 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddRepositories();
 builder.Services.AddServices();
-builder.Services.AddSeeders();
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 
@@ -40,7 +39,7 @@ app.MapControllers();
 app.Run();
 
 
-
+/*
 void SeedData(IHost app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
@@ -64,4 +63,4 @@ void SeedData(IHost app)
     }
 }
 
-
+*/

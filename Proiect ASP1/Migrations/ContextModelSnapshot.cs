@@ -56,7 +56,7 @@ namespace Proiect_ASP1.Migrations
                     b.Property<Guid>("AntrenorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Data_Infiintare")
+                    b.Property<DateTime?>("Data_Infiintare")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Localitate")
@@ -97,9 +97,6 @@ namespace Proiect_ASP1.Migrations
                     b.Property<string>("prenume")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("varsta")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

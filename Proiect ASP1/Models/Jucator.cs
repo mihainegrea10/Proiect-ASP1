@@ -9,8 +9,6 @@ namespace Proiect_ASP.Models
         public string prenume { get; set; }
         public string nume_familie { get; set; }
         public int aparitii { get; set; }
-
-        public int varsta { get; set; }
         public int goluri { get; set; }
         public Impresar Impresar { get; set; }
         public Guid ImpresarId { get; set; }

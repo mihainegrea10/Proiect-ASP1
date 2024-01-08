@@ -21,7 +21,6 @@ namespace Proiect_ASP1.Helper.Seeders
                     prenume = "Hagi",
                     nume_familie = "Ionut",
                     aparitii = 120,
-                    varsta = 27,
                     goluri = 31
 
 
@@ -31,7 +30,6 @@ namespace Proiect_ASP1.Helper.Seeders
                     prenume = "Marica",
                     nume_familie = "Andrei",
                     aparitii = 160,
-                    varsta = 30,
                     goluri = 32
 
 

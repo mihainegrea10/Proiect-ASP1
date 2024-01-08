@@ -21,7 +21,6 @@ namespace Proiect_ASP1.Helper.Seeders
                     prenume = "Mihai",
                     nume_familie = "Negrea",
                     trofee = 3
-
                 };
                 var antrenor2 = new Antrenor
                 {
@@ -30,10 +29,13 @@ namespace Proiect_ASP1.Helper.Seeders
                     trofee = 5
 
                 };
-                _context.Add(antrenor1);
-                _context.Add(antrenor2);
+                antrenor1.Id = Guid.NewGuid();
+                antrenor2.Id = Guid.NewGuid();
+                _context.antrenors.Add(antrenor1);
+                _context.antrenors.Add(antrenor2);
                 _context.SaveChanges();
                 
+
             }
         }
     }

@@ -24,13 +24,13 @@ namespace Proiect_ASP1.Controllers
         {
             _demoService = demoService;
         }
-        /*
+        
         [HttpGet]
         public IActionResult GetBynume_familie(string nume_familie)
         {
             var result = _demoService.GetDataMappedBynume_familie(nume_familie);
             return Ok(result);
-        }*/
+        }
         [HttpGet]
         public async Task<IActionResult> GetImpresari()
         {

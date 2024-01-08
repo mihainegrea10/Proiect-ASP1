@@ -39,15 +39,29 @@ app.MapControllers();
 
 app.Run();
 
+
+
 void SeedData(IHost app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
     using (var scope = scopedFactory.CreateScope())
     {
-        var service = scope.ServiceProvider.GetService<AntrenorSeeder>();
-        service.SeedInitialAntrenori();
+        // Seed pentru antrenori
+        var antrenorSeeder = scope.ServiceProvider.GetService<AntrenorSeeder>();
+        antrenorSeeder.SeedInitialAntrenori();
+
+        // Seed pentru jucãtori
+        var jucatorSeeder = scope.ServiceProvider.GetService<JucatorSeeder>();
+        jucatorSeeder.SeedInitialJucatori();
+
+        var impresarSeeder = scope.ServiceProvider.GetService<ImpresarSeeder>();
+        impresarSeeder.SeedInitialImpresari();
+
+        var echipaSeeder = scope.ServiceProvider.GetService<EchipaSeeder>();
+        echipaSeeder.SeedInitialEchipai();
+
     }
 }
-
 
 

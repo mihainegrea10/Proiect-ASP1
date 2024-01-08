@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_ASP.Data;
 
@@ -11,9 +12,11 @@ using Proiect_ASP.Data;
 namespace Proiect_ASP1.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240108133253_7")]
+    partial class _7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace Proiect_ASP1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AntrenorId")
+                    b.Property<Guid?>("AntrenorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Data_Infiintare")
@@ -70,7 +73,8 @@ namespace Proiect_ASP1.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AntrenorId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AntrenorId] IS NOT NULL");
 
                     b.ToTable("echipas");
                 });
@@ -81,7 +85,7 @@ namespace Proiect_ASP1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ImpresarId")
+                    b.Property<Guid?>("ImpresarId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("aparitii")
@@ -149,9 +153,7 @@ namespace Proiect_ASP1.Migrations
                 {
                     b.HasOne("Proiect_ASP.Models.Antrenor", "Antrenor")
                         .WithOne("Echipa")
-                        .HasForeignKey("Proiect_ASP.Models.Echipa", "AntrenorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Proiect_ASP.Models.Echipa", "AntrenorId");
 
                     b.Navigation("Antrenor");
                 });
@@ -160,9 +162,7 @@ namespace Proiect_ASP1.Migrations
                 {
                     b.HasOne("Proiect_ASP1.Models.Impresar", "Impresar")
                         .WithMany("jucators")
-                        .HasForeignKey("ImpresarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImpresarId");
 
                     b.Navigation("Impresar");
                 });
@@ -188,8 +188,7 @@ namespace Proiect_ASP1.Migrations
 
             modelBuilder.Entity("Proiect_ASP.Models.Antrenor", b =>
                 {
-                    b.Navigation("Echipa")
-                        .IsRequired();
+                    b.Navigation("Echipa");
                 });
 
             modelBuilder.Entity("Proiect_ASP.Models.Echipa", b =>

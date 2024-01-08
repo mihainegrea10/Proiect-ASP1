@@ -19,6 +19,9 @@ namespace Proiect_ASP1.Helper.Extensions
         public static IServiceCollection AddSeeders(this IServiceCollection services)
         {
             services.AddScoped<AntrenorSeeder>();
+            services.AddScoped<JucatorSeeder>();
+            services.AddScoped<ImpresarSeeder>();
+            services.AddScoped<EchipaSeeder>();
             return services;
         }
     }

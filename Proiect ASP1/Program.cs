@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Proiect_ASP.Data;
+using Proiect_ASP1.Helper;
 using Proiect_ASP1.Helper.Extensions;
+using Proiect_ASP1.Helper.Middleware;
 using Proiect_ASP1.Helper.Seeders;
 using Proiect_ASP1.Repositories.ImpresarRepository;
 using Proiect_ASP1.Services.DemoService;
@@ -18,7 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+builder.Services.AddSeeders();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 
 var app = builder.Build();
@@ -33,13 +36,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
 
 app.Run();
 
 
-/*
+
 void SeedData(IHost app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
@@ -63,4 +66,4 @@ void SeedData(IHost app)
     }
 }
 
-*/
+

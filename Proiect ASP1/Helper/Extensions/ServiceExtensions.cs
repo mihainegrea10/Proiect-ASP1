@@ -1,4 +1,5 @@
-﻿using Proiect_ASP1.Helper.Seeders;
+﻿using Proiect_ASP1.Helper.JwtToken;
+using Proiect_ASP1.Helper.Seeders;
 using Proiect_ASP1.Repositories.ImpresarRepository;
 using Proiect_ASP1.Services.DemoService;
 
@@ -22,6 +23,11 @@ namespace Proiect_ASP1.Helper.Extensions
             services.AddScoped<JucatorSeeder>();
             services.AddScoped<ImpresarSeeder>();
             services.AddScoped<EchipaSeeder>();
+            return services;
+        }
+        public static IServiceCollection AddUtils(this IServiceCollection services)
+        {
+            services.AddScoped<IJwtUtils, JwtUtils.JwtUtils>();
             return services;
         }
     }

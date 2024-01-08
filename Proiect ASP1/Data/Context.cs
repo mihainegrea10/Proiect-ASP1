@@ -11,6 +11,7 @@ namespace Proiect_ASP.Data
         public DbSet<Antrenor> antrenors { get; set; }
         public DbSet<Jucator> jucators { get; set; }
         public DbSet<Impresar> impresars { get; set; }
+        public DbSet<User> Users { get; set;  }
 
         public Context(DbContextOptions<Context> options) :base(options)
         {

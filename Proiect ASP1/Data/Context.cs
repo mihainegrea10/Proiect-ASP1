@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Proiect_ASP.Models;
+using Proiect_ASP1.Data;
 using Proiect_ASP1.Models;
 
 namespace Proiect_ASP.Data
@@ -19,6 +21,7 @@ namespace Proiect_ASP.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.AddConfigurations();
             
 
             modelBuilder.Entity<echipa_cont_juc>()
@@ -42,6 +45,12 @@ namespace Proiect_ASP.Data
                 .WithMany(m1 => m1.jucators);
 
             base.OnModelCreating(modelBuilder);
-        }    
+        }
+
+        public override int SaveChanges()
+        {
+            ChangeTracker.ManageEntityStates();
+            return base.SaveChanges();
+        }
     }
 }
